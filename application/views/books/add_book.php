@@ -10,11 +10,13 @@
 	<p>Book Title: <input type='text' name='title'></p>
 	<p>Author:</p>
 	<p>Choose From the list:<select name='author_from_list'>
-		<!-- loop through author list here -->
+		<?php foreach ($authors as $author): ?>
+			<option><?= $author['author'] ?></option>
+		<?php endforeach; ?>
 	</select></p>
 	<p>Or add a new author: <input type='text' name='new_author'></p>
-	<p name='review'>Review: <textarea></textarea></p>
-	<p name='rating'>Rating: <select>
+	<p>Review: <textarea name='comment'></textarea></p>
+	<p>Rating: <select name='rating'>
 		<option value='1'>1</option>
 		<option value='2'>2</option>
 		<option value='3'>3</option>
