@@ -46,13 +46,23 @@ class Books extends CI_Controller {
 	public function show($id)
 	{
 		$book_id = $this->Book->book_page($id);
+		// var_dump($book_id); die();
 		$this->load->view('/Books/show', array('books' =>$book_id));
 	}
 
 	public function book_review($book_id)
 	{
+		$this->form_validation->set_rules('review_comment', 'Review Comment', 'required');
+		if($this->form_validation->run() === FALSE)
+		{
+			$this->session->set_flashdata("review_error", validation_errors());
+			redirect('/books/show/'.$book_id);	
+		}
+		else
+		{	
 		$book_review = $this->Book->create_book_review($this->input->post(), $book_id);
 		redirect('/books/show/'.$book_id);
+		}
 	}
 
 }

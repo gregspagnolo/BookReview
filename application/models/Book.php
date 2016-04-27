@@ -69,7 +69,18 @@ class Book extends CI_Model {
 				  LIMIT 3";
 		$value = array($book_id);
 		return $this->db->query($query, $value)->result_array();
+	}
 
+	public function get_user_info($user_info)
+	{
+		$query = "SELECT books.title, users.*, books.title, books.id AS book_id, COUNT(*)
+				  FROM books
+				  LEFT JOIN reviews ON reviews.book_id = books.id
+				  LEFT JOIN users ON users.id = reviews.user_id
+				  WHERE reviews.user_id= ?
+				  GROUP BY books.title";
+		$values = array($user_info);
+		return $this->db->query($query, $values)->result_array();
 	}
 
 	public function show_authors()

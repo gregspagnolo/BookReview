@@ -20,7 +20,7 @@
 				<h5>Reviews:</h5>
 				<?php foreach($books as $book): ?>
 				<p>Rating: <?= $book['rating'] ?></p>
-				<?= $book['alias'] ?> says: <?= $book['comment'] ?>
+				<a href="/users/show/<?=$book['user_id']?>"><?= $book['alias'] ?></a> says: <?= $book['comment'] ?>
 				<?php $book['created_at'] = date("F j, Y"); ?>
 				<p><i>Posted On: <?= $book['created_at'] ?></i></p>
 				<hr>
@@ -39,6 +39,7 @@
 						<option value='4'>4</option>
 						<option value='5'>5</option>		
 					</select> stars</p>
+					<?= $this->session->flashdata('review_error') ?>
 					<p><input type='submit' value='Submit Review'></p>
 				</form>
 			</div>

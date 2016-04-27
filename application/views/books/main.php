@@ -33,7 +33,7 @@
 				<?php foreach ($reviews as $three_reviews): ?>
 				<p><a href="/books/show/<?=$three_reviews['book_id'] ?>"><?= $three_reviews['title'] ?></a></p>
 				<p>Rating: <?= $three_reviews['rating'] ?></p>
-				<p><strong><?= $three_reviews['alias'] ?></strong> says: <?= $three_reviews['comment'] ?></p>
+				<p><strong><a href="/users/show/<?=$three_reviews['user_id']?>"><?= $three_reviews['alias'] ?></a></strong> says: <?= $three_reviews['comment'] ?></p>
 				<?php $three_reviews['created_at'] = date("F j, Y"); ?>
 				<p><i>Posted On <?= $three_reviews['created_at'] ?></i></p>
 				<hr>
