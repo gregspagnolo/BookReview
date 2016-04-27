@@ -34,23 +34,39 @@ class Book extends CI_Model {
 		$this->db->query($query, $values);
 	}
 
+	public function create_book_review($post, $book_id)
+	{
+		$query = "INSERT INTO reviews (comment, rating, created_at, book_id, user_id)
+				 VALUES (?, ?, NOW(), ?, ?)";
+		$values = array($post['review_comment'], $post['rating'], $book_id, $this->session->userdata('user_id'));
+		$this->db->query($query, $values);
+	}
+
 	public function get_3_reviews()
 	{
-		$query = "SELECT reviews.*, books.title, users.alias FROM users
-				  LEFT JOIN books ON books.user_id = users.id
-				  LEFT JOIN reviews ON reviews.user_id = users.id 
+		$query = "SELECT reviews.*, books.title, users.alias FROM reviews
+				  LEFT JOIN books ON books.id = reviews.book_id
+				  LEFT JOIN users ON users.id = reviews.user_id 
 				  GROUP BY reviews.created_at DESC LIMIT 3";
-		// $values = array();
+		return $this->db->query($query)->result_array();
+	}
+
+	public function books_with_reviews()
+	{
+		$query = "SELECT reviews.*, books.title FROM reviews
+				  LEFT JOIN books ON books.id = reviews.book_id
+				  GROUP BY books.title";
 		return $this->db->query($query)->result_array();
 	}
 
 	public function book_page($book_id)
 	{
 		$query = "SELECT reviews.*, books.title, books.author, users.alias 		 
-				  FROM users
-				  LEFT JOIN books ON books.user_id = users.id
-				  LEFT JOIN reviews ON reviews.user_id = users.id 
-				  WHERE books.id = ?";
+				  FROM reviews
+				  LEFT JOIN books ON books.id = reviews.book_id
+				  LEFT JOIN users ON users.id = reviews.user_id 
+				  WHERE books.id = ?
+				  LIMIT 3";
 		$value = array($book_id);
 		return $this->db->query($query, $value)->result_array();
 
@@ -60,9 +76,4 @@ class Book extends CI_Model {
 	{
 		return $this->db->query("SELECT author FROM books GROUP BY author")->result_array();
 	}
-
-
-
-
-
 }
