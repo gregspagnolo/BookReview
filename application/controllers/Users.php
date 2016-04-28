@@ -20,7 +20,7 @@ class Users extends CI_Controller {
 	{
 		$user_info = $this->Book->get_user_info($id);
 		// var_dump($user_info); die();
-		$this->load->view('/Users/show', array('user_info' =>$user_info));
+		$this->load->view('users/show', array('user_info' =>$user_info));
 	}
 
 
