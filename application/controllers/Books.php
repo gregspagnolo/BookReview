@@ -47,7 +47,7 @@ class Books extends CI_Controller {
 	{
 		$book_id = $this->Book->book_page($id);
 		// var_dump($book_id); die();
-		$this->load->view('/Books/show', array('books' =>$book_id));
+		$this->load->view('books/show', array('books' =>$book_id));
 	}
 
 	public function book_review($book_id)
