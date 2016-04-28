@@ -17,6 +17,7 @@
 	<div class="container">
 		<div class="row">
 			 <div class="six columns">
+			 	<?= $this->session->flashdata('review'); ?>
 				<p><h5>Hi, <?= $this->session->userdata('user_session') ?></h5></p>
 			</div>
 

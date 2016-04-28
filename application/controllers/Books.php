@@ -65,4 +65,31 @@ class Books extends CI_Controller {
 		}
 	}
 
+	public function delete_review ($id) 
+	{
+		$this->Book->delete_review($id);
+		$this->session->set_flashdata('review', 'This review has been deleted');
+		redirect('/books/');
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

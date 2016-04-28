@@ -42,6 +42,12 @@ class Book extends CI_Model {
 		$this->db->query($query, $values);
 	}
 
+	public function delete_review($id)
+	{
+		$query = "DELETE FROM reviews WHERE id = ?";
+		return $this->db->query($query, array($id));
+	}
+
 	public function get_3_reviews()
 	{
 		$query = "SELECT reviews.*, books.title, users.alias FROM reviews

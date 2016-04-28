@@ -6,8 +6,18 @@
 		<link rel='stylesheet' href='/css/normalize.css'>
 		<link rel='stylesheet' href='/css/skeleton.css'>
 	</head>
+	<style>
+	.float {
+		float: right;
+		margin-top: 15px;
+	}
+	</style>
 <body>
 	<div class="container">
+		<div class="row float">
+			<a href="/Books/">Home</a>
+			<a href="/Users/logout">Logout</a>
+		</div>
 		<div class="row">
 			<div class="eight columns">
 			<h4>Add a New Book Title and Review</h4>

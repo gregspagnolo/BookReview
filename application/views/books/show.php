@@ -10,9 +10,17 @@
 	.top-padding {
 		margin-top: 40px;
 	}
+	.float {
+		float: right;
+		padding-top: 15px;
+	}
 	</style>
 <body>
 	<div class="container">
+		<div class="row float">
+				<a href="/Books/">Home</a>
+				<a href="/Users/logout">Logout</a>
+		</div>
 		<div class="row">
 			<div class="six columns">
 				<p><h3><?= $books[0]['title'] ?></h3></p>
@@ -23,6 +31,10 @@
 				<a href="/users/show/<?=$book['user_id']?>"><?= $book['alias'] ?></a> says: <?= $book['comment'] ?>
 				<?php $book['created_at'] = date("F j, Y"); ?>
 				<p><i>Posted On: <?= $book['created_at'] ?></i></p>
+				<?php if ($book['user_id'] == $this->session->userdata('user_id')) { ?>
+				<a href='/Books/delete_review/<?= $book['id'] ?>'>Delete Review</a>
+			 	<?php } ?>
+				
 				<hr>
 				<?php endforeach; ?>
 			</div>
